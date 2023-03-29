@@ -3,7 +3,7 @@
 This repository contains a set of files and scripts to implement a data pipeline with Docker and PostgreSQL. The pipeline consists of data ingestion, running in Docker containers. The files include a Docker Compose configuration file for easy deployment and integration with other Docker tools, as well as scripts for data ingestion and database configuration. 
 
 
-## Contents.
+## Contents
 
 Introduction to Docker: explaining why Docker is needed and creating a simple data pipeline in Docker.
 
