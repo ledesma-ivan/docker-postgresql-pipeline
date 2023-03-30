@@ -99,5 +99,5 @@ pip install -U mycli
 Using `pgcli` to connect to Postgres
 
 ```bash
-pgcli -h localhost -p 5432 -u -d ny_taxi
+pgcli -h localhost -p 5432 -U root -d ny_taxi
 ```
