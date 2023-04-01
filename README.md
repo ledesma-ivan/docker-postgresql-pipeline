@@ -133,8 +133,8 @@ docker run -it \
   dpage/pgadmin4
 ```
 
-It is also possible to use 
-DBeaver 
+It is also possible to use DBeaver it has the advantage of being able to connect to many different DBMS/DW from the same UI (Postgres, MySQL, BigQuery, Snowflake, etc). 
+
 ### Running Postgres and pgAdmin together
 
 Create a network
@@ -182,3 +182,56 @@ docker run -it \
   --name pgadmin-2 \
   dpage/pgadmin4
 ```
+
+### Data ingestion
+
+Running locally
+
+```bash
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+python ingest_data.py \
+  --user=root \
+  --password=root \
+  --host=localhost \
+  --port=5432 \
+  --db=ny_taxi \
+  --table_name=yellow_taxi_trips \
+  --url=${URL}
+```
+
+Build the image
+It very important permission in docker xd
+
+```bash
+sudo docker build -t taxi_ingest:v001 .
+```
+
+On Linux you may have a problem building it:
+
+```
+error checking context: 'can't stat '/home/name/ny_taxi_postgres_data''.
+```
+
+You can solve it with `.dockerignore`:
+
+* Create a folder `data`
+* Move `ny_taxi_postgres_data` to `data` (you might need to use `sudo` for that)
+* Map `-v $(pwd)/data/ny_taxi_postgres_data:/var/lib/postgresql/data`
+* Create a file `.dockerignore` and add `data` there
+
+Run the script with Docker
+
+```bash
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+docker run -it \
+  --network=pg-network \
+  taxi_ingest:v001 \
+    --user=root \
+    --password=root \
+    --host=pg-database \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name=yellow_taxi_trips \
+    --url=${URL}
+```
+
