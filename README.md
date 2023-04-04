@@ -235,3 +235,38 @@ docker run -it \
     --url=${URL}
 ```
 
+
+### Docker-Compose 
+
+Run it:
+
+```bash
+docker-compose up
+```
+
+Run in detached mode:
+
+```bash
+docker-compose up -d
+```
+
+Shutting it down:
+
+```bash
+docker-compose down
+```
+
+Note: Most of the errors are permissions errors eithers postgres o pgAdmin.
+Example for change permissions:
+```bash
+sudo chmod -R 777 /home/...
+```
+To make pgAdmin configuration persistent, create a folder `data_pgadmin`. Change its permission via
+
+```bash
+sudo chown 5050:5050 data_pgadmin
+```
+and mount it to the `/var/lib/pgadmin` folder:
+
+
+
