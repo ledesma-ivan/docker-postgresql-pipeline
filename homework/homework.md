@@ -33,6 +33,8 @@ How many python packages/modules are installed?
 - 3
 - 7
 
+Reply: How many python packages/modules are installed? is three.
+The procedure command docker run -it --entrypoint bash python:3.9 and check the packages/modules are installed is pip list in the docker bash.
 # Prepare Postgres
 
 Run Postgres and load data as shown in the videos
