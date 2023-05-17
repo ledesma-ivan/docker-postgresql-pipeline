@@ -19,6 +19,8 @@ Which tag has the following text? - *Write the image ID to the file*
 - `--idimage string`
 - `--idfile string`
 
+Reply:
+The result is --idfile string and the search command docker build --help
 
 ## Question 2. Understanding docker first run 
 
